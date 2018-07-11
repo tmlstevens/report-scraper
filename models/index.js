@@ -1,4 +1,5 @@
 module.exports = {
     Report: require("./Report"),
-    Note: require("./Note")
+    Comment: require("./Comment"),
+    User: require("./User")
 }
