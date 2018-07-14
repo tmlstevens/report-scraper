@@ -47,16 +47,38 @@ router.get("/reports/:id", function (req, res) {
         })
 })
 
-router.post("/reports/:id", function(req, res) {
-    db.Comment.create(req.body)
-    .then(function(dbComment) {
-        return db.Report.findOneAndUpdate({
-        },{
-            comments: dbComment._id
-        })
+
+
+
+
+router.get('/comments/:reportId', function(request, response) {
+    db.Report.findById(request.params.reportId)
+    .then(function(Report) {
+        return db.Comment.find({'_id': { $in: Report.comments } })
     })
-    .then(function(dbReport) {
-        res.json(dbReport);
+    .then(function(commentResults) {
+        console.log(commentResults);
+        response.json(commentResults)
+    })
+})
+
+
+
+
+
+router.post("/comments/:reportId", function(req, res) {
+    db.Comment.create(req.body)
+    .then(function(newComment) {
+        return db.Report.findById(req.params.reportId)
+        
+        .then(function(report) {
+            report.comments.push(newComment);
+            return report.save();
+        });
+    })
+    .then(function(Report) {
+        console.log(Report);
+        res.json(Report);
     })
     .catch(function(err) {
         res.json(err);
