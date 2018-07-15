@@ -1,0 +1,30 @@
+body {
+    background-color: #F2F6D0
+}
+
+
+.comments {
+    background-color: #F2F6D0
+}
+
+.accord {
+    background-color: #F2F6D0;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.acc-div {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+.text-box {
+    width: 85%
+}
